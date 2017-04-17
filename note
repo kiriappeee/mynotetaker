@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import argparse
+import os
+from datetime import datetime
+
+def newnote():
+    file_name_to_open = os.path.join(os.getenv("HOME"),".notes", datetime.now().strftime('%Y-%m-%d') + ".md")
+    lines_to_write = []
+    if not os.path.exists(file_name_to_open):
+        lines_to_write.append("# "+datetime.now().strftime('%Y-%m-%d') + "\n")
+    f = open(file_name_to_open, 'a')
+    lines_to_write.append("""
+## {current_time}
+
+""".format(current_time = datetime.now().strftime('%H:%M:%S')))
+    f.writelines(lines_to_write)
+    f.close()
+    os.system('gvim "+normal G$" +startinsert {file_name}'.format(file_name=file_name_to_open))
+
+if __name__=="__main__":
+    parser = argparse.ArgumentParser()
+    #parser.add_argument("-t", "--take")
+    #args = parser.parse_args()
+    #print(args.take)
+    #print("entering the main program")
+    if not os.path.exists(os.path.join(os.getenv("HOME"),".notes")):
+        os.mkdir(os.path.join(os.getenv("HOME"),".notes"))
+    newnote()
