@@ -15,7 +15,7 @@ def newnote():
 """.format(current_time = datetime.now().strftime('%H:%M:%S')))
     f.writelines(lines_to_write)
     f.close()
-    os.system('gvim "+normal G$" +startinsert {file_name}'.format(file_name=file_name_to_open))
+    os.system('vim "+normal G$" +startinsert {file_name}'.format(file_name=file_name_to_open))
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
