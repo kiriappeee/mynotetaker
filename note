@@ -15,6 +15,7 @@ def newnote():
 """.format(current_time = datetime.now().strftime('%H:%M:%S')))
     f.writelines(lines_to_write)
     f.close()
+
     if not os.getenv('EDITOR') or os.getenv('EDITOR') == "vi":
         os.system('vi "+normal G$" +startinsert {file_name}'.format(file_name=file_name_to_open))
     elif os.getenv('EDITOR') == "gvim":
